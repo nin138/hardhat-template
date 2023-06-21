@@ -1,6 +1,16 @@
 {
   "name": "sakaba-launchpad-contracts",
   "packageManager": "yarn@3.6.0",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "format": "yarn run format:ts & yarn run format:sol",
+    "format:ts": "prettier --write ./**/*.ts",
+    "format:sol": "prettier --write ./contracts/**/*.sol",
+    "postinstall": "husky install",
+    "size": "hardhat compile && hardhat size-contracts",
+    "coverage": "hardhat coverage"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
@@ -15,10 +25,25 @@
     "chai": "^4.2.0",
     "ethers": "^6.4.0",
     "hardhat": "^2.15.0",
+    "hardhat-contract-sizer": "^2.10.0",
     "hardhat-gas-reporter": "^1.0.8",
+    "prettier": "^2.8.8",
+    "prettier-plugin-solidity": "^1.1.3",
     "solidity-coverage": "^0.8.0",
     "ts-node": ">=8.0.0",
     "typechain": "^8.1.0",
     "typescript": ">=4.5.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn format:ts"
+    ],
+    "*.sol": [
+      "yarn format:sol"
+    ]
+  },
+  "dependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2"
   }
 }
